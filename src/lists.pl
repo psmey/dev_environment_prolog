@@ -14,10 +14,12 @@ perm([], []).
 % perm([Head1|Tail1], List2) :-
 %     select(Head1, List2, List2WithoutHead1),
 %     permutation(Tail1, List2WithoutHead1).
+% lol war doch erlaubt :(
+
 % Zu Fuß mit eigener Hilfsfunktion:
-perm([Head1|Tail1], List2) :-
-    remove(Head1, List2, NewList2),
-    perm(Tail1, NewList2).
+perm([Head|Tail], List) :-
+    remove(Head, List, NewList),
+    perm(Tail, NewList).
 
 % Hilfsfunktion
 % Basisfall: leere Liste ist leer
@@ -29,3 +31,17 @@ remove(X, [X|Tail], NewTail) :-
 remove(X, [Head|Tail], [Head|NewTail]) :-
     X \= Head,
     remove(X, Tail, NewTail).
+
+% Implementieren Sie den mergesort-Algorithmus in Prolog!
+% Zerlegen Sie das Problem:
+% 1. split(L, L1, L2) zerlege die Liste L in Teillisten L1 und L2, auf die die Elemente abwechselnd verteilt werden.
+
+split([], [], []).
+split([X], [X], []).
+
+% 2. merge(S1, S2, S) kombiniere die jeweils aufsteigend sortierten Listen von Zahlen S1 und S2, indem der jeweils kleinere Kopf der beiden sortierten Listen als nächstes in die Ergebnisliste eingefügt wird.
+% 3. mergesort(L, S) verwende beide Hilfsfunktionen, falls die unsortierte Liste L mehr als ein Element hat. (length/2 ist vordefiniert) a Testen Sie Ihre Funktionen einzeln; Lösungen dürfen weder inkorrekt noch überzählig sein!
+
+
+max(X, Y, Z) :- X >= Y, !, X = Z.
+max(X, Y, Y).
